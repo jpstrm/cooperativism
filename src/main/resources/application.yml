@@ -1,0 +1,39 @@
+logging:
+  level:
+    br.com.cooperativism: DEBUG
+    org.springframework:
+      boot.context: INFO
+
+server:
+  compression:
+    enabled: true
+  context-path: /
+  port: 8000
+
+documentation:
+  info:
+    title: Api Cooperativismo
+    description: Gerenciamento de Assembleias - controle de votação.
+  version: ~project.version~
+  base-package: br.com.cooperativism.controller
+
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  cache:
+    type: redis
+  datasource:
+    continue-on-error: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      test-on-borrow: true
+      test-on-connect: true
+      validation-query: SELECT 1 FROM DUAL
+      init-s-q-l: SELECT 1 FROM DUAL
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MY_SQL_PORT:3306}/cooperativism?createDatabaseIfNotExist=true
+    username: root
+    password: db1234567
+  jpa:
+    hibernate:
+      ddl-auto: update
