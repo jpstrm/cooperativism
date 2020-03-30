@@ -37,3 +37,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+api:
+  user: https://user-info.herokuapp.com/users

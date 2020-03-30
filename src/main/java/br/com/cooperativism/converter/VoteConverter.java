@@ -31,7 +31,7 @@ public class VoteConverter extends DefaultConverter<Vote, VoteDto> {
   public Vote fromRequest(VoteRequest voteRequest) {
     final Vote vote = new Vote();
     vote.setMember(memberService.getOrSave(voteRequest.getMemberCpf()));
-    vote.setSession(sessionService.findValidByTopicName(voteRequest.getTopicName()));
+    vote.setSession(sessionService.findValidByTopicId(voteRequest.getTopicId()));
     vote.setVote(voteRequest.getVoteEnum());
 
     return vote;
