@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class Vote extends AbstractModel {
+public class Vote extends AbstractModel implements Serializable {
+
+  private static final long serialVersionUID = -5141408527987836636L;
 
   @OneToOne(optional = false)
   @JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
@@ -17,7 +20,7 @@ public class Vote extends AbstractModel {
   private Topic topic;
 
   @Column(nullable = false)
-  private Boolean result;
+  private Boolean vote;
 
   public Vote() {}
 
@@ -37,12 +40,12 @@ public class Vote extends AbstractModel {
     this.topic = topic;
   }
 
-  public Boolean getResult() {
-    return result;
+  public Boolean getVote() {
+    return vote;
   }
 
-  public void setResult(Boolean result) {
-    this.result = result;
+  public void setVote(Boolean vote) {
+    this.vote = vote;
   }
 
 }

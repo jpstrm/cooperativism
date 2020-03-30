@@ -1,7 +1,7 @@
 package br.com.cooperativism.controller.swagger;
 
 import br.com.cooperativism.request.SessionRequest;
-import br.com.cooperativism.response.SessionListResponse;
+import br.com.cooperativism.response.session.SessionListResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

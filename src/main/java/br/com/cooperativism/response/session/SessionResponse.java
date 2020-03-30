@@ -1,4 +1,4 @@
-package br.com.cooperativism.response;
+package br.com.cooperativism.response.session;
 
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.enums.SessionStatus;

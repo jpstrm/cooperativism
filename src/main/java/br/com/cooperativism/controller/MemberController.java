@@ -2,7 +2,7 @@ package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.MemberApi;
 import br.com.cooperativism.dto.MemberDto;
-import br.com.cooperativism.response.MemberListResponse;
+import br.com.cooperativism.response.member.MemberListResponse;
 import br.com.cooperativism.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

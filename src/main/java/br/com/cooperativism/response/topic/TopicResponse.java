@@ -1,4 +1,4 @@
-package br.com.cooperativism.response;
+package br.com.cooperativism.response.topic;
 
 import br.com.cooperativism.dto.TopicDto;
 import io.swagger.annotations.ApiModel;

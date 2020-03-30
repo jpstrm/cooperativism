@@ -4,7 +4,7 @@ import br.com.cooperativism.controller.swagger.SessionApi;
 import br.com.cooperativism.converter.SessionConverter;
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.request.SessionRequest;
-import br.com.cooperativism.response.SessionListResponse;
+import br.com.cooperativism.response.session.SessionListResponse;
 import br.com.cooperativism.service.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

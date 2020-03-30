@@ -1,4 +1,4 @@
-package br.com.cooperativism.response;
+package br.com.cooperativism.response.member;
 
 import br.com.cooperativism.dto.MemberDto;
 import com.fasterxml.jackson.annotation.JsonProperty;

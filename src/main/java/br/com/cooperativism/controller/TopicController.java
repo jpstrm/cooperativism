@@ -4,7 +4,7 @@ import br.com.cooperativism.controller.swagger.TopicApi;
 import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.request.TopicRequest;
-import br.com.cooperativism.response.TopicListResponse;
+import br.com.cooperativism.response.topic.TopicListResponse;
 import br.com.cooperativism.service.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

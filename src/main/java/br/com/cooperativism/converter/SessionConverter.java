@@ -4,8 +4,8 @@ import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.enums.SessionStatus;
 import br.com.cooperativism.helper.ApiHelper;
 import br.com.cooperativism.model.Session;
-import br.com.cooperativism.response.SessionListResponse;
-import br.com.cooperativism.response.SessionResponse;
+import br.com.cooperativism.response.session.SessionListResponse;
+import br.com.cooperativism.response.session.SessionResponse;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

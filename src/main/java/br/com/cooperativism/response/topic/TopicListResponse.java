@@ -1,4 +1,4 @@
-package br.com.cooperativism.response;
+package br.com.cooperativism.response.topic;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;

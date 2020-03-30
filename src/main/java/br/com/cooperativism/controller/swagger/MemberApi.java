@@ -1,6 +1,6 @@
 package br.com.cooperativism.controller.swagger;
 
-import br.com.cooperativism.response.MemberListResponse;
+import br.com.cooperativism.response.member.MemberListResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

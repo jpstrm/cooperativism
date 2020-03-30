@@ -2,7 +2,7 @@ package br.com.cooperativism.controller.swagger;
 
 import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.request.TopicRequest;
-import br.com.cooperativism.response.TopicListResponse;
+import br.com.cooperativism.response.topic.TopicListResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
