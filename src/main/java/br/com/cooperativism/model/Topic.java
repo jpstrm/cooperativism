@@ -21,6 +21,10 @@ public class Topic extends AbstractModel implements Serializable {
 
   public Topic() {}
 
+  public Topic(final String name) {
+    this.name = name;
+  }
+
   public Long getId() {
     return id;
   }

@@ -23,6 +23,11 @@ public class SessionRequest {
   public SessionRequest() {
   }
 
+  public SessionRequest(final Integer duration, final Long topicId) {
+    this.duration = duration;
+    this.topicId = topicId;
+  }
+
   public Integer getDuration() {
     return duration;
   }

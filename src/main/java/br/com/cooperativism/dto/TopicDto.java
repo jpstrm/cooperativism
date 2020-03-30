@@ -30,6 +30,12 @@ public class TopicDto implements Serializable {
   public TopicDto() {
   }
 
+  public TopicDto(final String name, final Integer votesYes, final Integer votesNo) {
+    this.name = name;
+    this.votesYes = votesYes;
+    this.votesNo = votesNo;
+  }
+
   public Long getId() {
     return id;
   }

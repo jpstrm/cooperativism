@@ -35,6 +35,12 @@ public class SessionDto implements Serializable {
   public SessionDto() {
   }
 
+  public SessionDto(final LocalDateTime votingStart, final LocalDateTime votingEnd, final TopicDto topic) {
+    this.votingStart = votingStart;
+    this.votingEnd = votingEnd;
+    this.topic = topic;
+  }
+
   public Long getId() {
     return id;
   }

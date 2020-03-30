@@ -26,6 +26,12 @@ public class Session extends AbstractModel implements Serializable {
 
   public Session() {}
 
+  public Session(final LocalDateTime votingStart, final LocalDateTime votingEnd, final Topic topic) {
+    this.votingStart = votingStart;
+    this.votingEnd = votingEnd;
+    this.topic = topic;
+  }
+
   public LocalDateTime getVotingStart() {
     return votingStart;
   }
