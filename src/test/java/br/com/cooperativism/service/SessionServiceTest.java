@@ -1,6 +1,5 @@
 package br.com.cooperativism.service;
 
-import br.com.cooperativism.base.AbstractUnitTest;
 import br.com.cooperativism.converter.SessionConverter;
 import br.com.cooperativism.exception.BusinessException;
 import br.com.cooperativism.exception.NotFoundException;
@@ -13,9 +12,11 @@ import br.com.cooperativism.repository.SessionRepository;
 import br.com.cooperativism.request.SessionRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -28,7 +29,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class SessionServiceTest extends AbstractUnitTest {
+@ExtendWith(MockitoExtension.class)
+class SessionServiceTest {
 
   @InjectMocks
   private SessionService sessionService;

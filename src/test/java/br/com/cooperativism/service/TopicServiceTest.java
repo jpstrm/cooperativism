@@ -1,6 +1,5 @@
 package br.com.cooperativism.service;
 
-import br.com.cooperativism.base.AbstractUnitTest;
 import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.enums.VoteEnum;
@@ -13,8 +12,10 @@ import br.com.cooperativism.model.Vote;
 import br.com.cooperativism.repository.TopicRepository;
 import br.com.cooperativism.repository.VoteRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -29,7 +30,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
-class TopicServiceTest extends AbstractUnitTest {
+@ExtendWith(MockitoExtension.class)
+class TopicServiceTest {
 
   @InjectMocks
   private TopicService topicService;

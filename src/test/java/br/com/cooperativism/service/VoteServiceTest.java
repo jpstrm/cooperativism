@@ -1,6 +1,5 @@
 package br.com.cooperativism.service;
 
-import br.com.cooperativism.base.AbstractUnitTest;
 import br.com.cooperativism.converter.VoteConverter;
 import br.com.cooperativism.enums.VoteEnum;
 import br.com.cooperativism.exception.BusinessException;
@@ -12,9 +11,11 @@ import br.com.cooperativism.repository.VoteRepository;
 import br.com.cooperativism.request.VoteRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
@@ -27,7 +28,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class VoteServiceTest extends AbstractUnitTest {
+@ExtendWith(MockitoExtension.class)
+class VoteServiceTest {
 
   @InjectMocks
   private VoteService voteService;

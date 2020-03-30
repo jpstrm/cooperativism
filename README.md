@@ -5,6 +5,7 @@ Gerencimaneto de sessões de votações em Assembleias
 # Tecnologias usadas
 
 * SpringBoot / JPA / Swagger / Webflux
+* Junit 5 / Mockito
 * MySQL
 
 # Requisitos

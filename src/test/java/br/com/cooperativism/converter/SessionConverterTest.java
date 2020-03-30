@@ -1,19 +1,21 @@
 package br.com.cooperativism.converter;
 
-import br.com.cooperativism.base.AbstractUnitTest;
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.enums.SessionStatusEnum;
 import br.com.cooperativism.mock.session.SessionDtoMock;
 import br.com.cooperativism.response.session.SessionResponse;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class SessionConverterTest extends AbstractUnitTest {
+@ExtendWith(MockitoExtension.class)
+class SessionConverterTest {
 
   @InjectMocks
   private SessionConverter sessionConverter;
