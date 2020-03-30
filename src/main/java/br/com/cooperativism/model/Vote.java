@@ -24,6 +24,13 @@ public class Vote extends AbstractModel implements Serializable {
 
   public Vote() {}
 
+  public Vote(Member member, Session session,
+      VoteEnum vote) {
+    this.member = member;
+    this.session = session;
+    this.vote = vote;
+  }
+
   public Member getMember() {
     return member;
   }

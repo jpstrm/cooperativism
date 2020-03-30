@@ -20,9 +20,12 @@
     <java.version>11</java.version>
     <swagger.version>2.9.2</swagger.version>
     <model-mapper.version>2.3.2</model-mapper.version>
+    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 
     <!-- Test versions -->
-    <powermock.version>2.0.2</powermock.version>
+    <mockito-core.version>2.23.4</mockito-core.version>
+    <mockito-junit-jupiter.version>2.23.4</mockito-junit-jupiter.version>
+    <junit-platform.version>1.3.2</junit-platform.version>
   </properties>
 
   <dependencies>
@@ -96,6 +99,14 @@
       </exclusions>
     </dependency>
 
+    <!-- Junit Platform -->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${junit-platform.version}</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- Spring reactor test -->
     <dependency>
       <groupId>io.projectreactor</groupId>
@@ -103,19 +114,21 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Powermock test -->
+    <!-- Mockito-->
     <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <version>${powermock.version}</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito-core.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
-      <version>${powermock.version}</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito-junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -124,6 +137,19 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- Maven surefire plugin -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provide</artifactId>
+            <version>${junit-platform.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>

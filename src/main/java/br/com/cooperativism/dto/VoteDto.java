@@ -29,6 +29,12 @@ public class VoteDto implements Serializable {
   public VoteDto() {
   }
 
+  public VoteDto(MemberDto member, SessionDto session, String vote) {
+    this.member = member;
+    this.session = session;
+    this.vote = vote;
+  }
+
   public Long getId() {
     return id;
   }

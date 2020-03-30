@@ -24,6 +24,11 @@ public class MemberDto implements Serializable {
   public MemberDto() {
   }
 
+  public MemberDto(String name, String cpf) {
+    this.name = name;
+    this.cpf = cpf;
+  }
+
   public String getName() {
     return name;
   }

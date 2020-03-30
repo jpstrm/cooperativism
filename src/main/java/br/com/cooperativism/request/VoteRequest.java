@@ -34,6 +34,12 @@ public class VoteRequest implements Serializable {
   public VoteRequest() {
   }
 
+  public VoteRequest(final Long topicId, final String memberCpf, final String vote) {
+    this.topicId = topicId;
+    this.memberCpf = memberCpf;
+    this.vote = vote;
+  }
+
   public Long getTopicId() {
     return topicId;
   }
