@@ -1,7 +1,8 @@
-package br.com.cooperativism.mock;
+package br.com.cooperativism.mock.session;
 
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.helper.ApiHelper;
+import br.com.cooperativism.mock.topic.TopicDtoMock;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package br.com.cooperativism.mock;
+package br.com.cooperativism.mock.session;
 
 import br.com.cooperativism.request.SessionRequest;
 

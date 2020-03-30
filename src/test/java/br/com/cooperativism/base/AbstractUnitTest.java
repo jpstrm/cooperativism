@@ -1,10 +1,8 @@
 package br.com.cooperativism.base;
 
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@Ignore
-@RunWith(PowerMockRunner.class)
+@ExtendWith(MockitoExtension.class)
 public abstract class AbstractUnitTest {
 }
