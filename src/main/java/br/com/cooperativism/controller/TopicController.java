@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,5 +49,16 @@ public class TopicController implements TopicApi {
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
+
+  @Override
+  @GetMapping("/{topicName}")
+  public ResponseEntity<TopicDto> findByName(@PathVariable String topicName) {
+    logger.info("Request POST /pautas/{}", topicName);
+    final TopicDto topicDto = topicService.findByNameToDto(topicName);
+    logger.info("Response POST /pautas/{} - {}", topicName, topicDto);
+
+    return ResponseEntity.status(HttpStatus.OK).body(topicDto);
+  }
+
 
 }

@@ -2,6 +2,7 @@ package br.com.cooperativism.service;
 
 import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
+import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.model.Topic;
 import br.com.cooperativism.repository.TopicRepository;
 import br.com.cooperativism.request.TopicRequest;
@@ -24,10 +25,29 @@ public class TopicService {
     return topicConverter.toDtoList(members);
   }
 
-  public void create(TopicRequest topicRequest) {
+  public void create(final TopicRequest topicRequest) {
     final Topic topic = topicRepository.findFirstByNameIgnoreCase(topicRequest.getName())
         .orElse(topicConverter.fromRequest(topicRequest));
     topicRepository.save(topic);
+  }
+
+  public Topic findByName(final String topicName) {
+    return topicRepository.findFirstByNameIgnoreCase(topicName)
+        .orElseThrow(this::throwNotFound);
+  }
+
+  public TopicDto findByNameToDto(final String topicName) {
+
+    return topicConverter.toDto(findByName(topicName));
+  }
+
+  public Topic findById(final Long topicId) {
+    return topicRepository.findById(topicId)
+        .orElseThrow(this::throwNotFound);
+  }
+
+  private NotFoundException throwNotFound() {
+    throw new NotFoundException("Pauta não encontrada.");
   }
 
 }

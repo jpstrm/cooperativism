@@ -1,16 +1,24 @@
 package br.com.cooperativism.request;
 
-import br.com.cooperativism.model.Topic;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @ApiModel("Sessão request")
 public class SessionRequest {
 
-  @ApiModelProperty("Duração em minutos")
+  @ApiModelProperty(value = "Duração em minutos", example = "1")
+  @JsonProperty("duracao")
+  @Min(value = 1, message = "O campo 'duracao' deve ser maior que 1")
   private Integer duration = 1;
 
-  private Topic topic;
+  @ApiModelProperty(value = "Id da Pauta", example = "1")
+  @NotNull(message = "O camo 'idTopico' não pode ser nulo")
+  @JsonProperty("idTopico")
+  private Long topicId;
 
   public SessionRequest() {
   }
@@ -23,12 +31,12 @@ public class SessionRequest {
     this.duration = duration;
   }
 
-  public Topic getTopic() {
-    return topic;
+  public Long getTopicId() {
+    return topicId;
   }
 
-  public void setTopic(Topic topic) {
-    this.topic = topic;
+  public void setTopicId(Long topicId) {
+    this.topicId = topicId;
   }
 
 }
