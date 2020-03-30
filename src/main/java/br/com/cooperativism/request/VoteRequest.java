@@ -1,5 +1,6 @@
 package br.com.cooperativism.request;
 
+import br.com.cooperativism.enums.VoteEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -52,6 +53,10 @@ public class VoteRequest implements Serializable {
 
   public void setVote(String vote) {
     this.vote = vote;
+  }
+
+  public VoteEnum getVoteEnum() {
+    return VoteEnum.find(this.vote).get();
   }
 
 }

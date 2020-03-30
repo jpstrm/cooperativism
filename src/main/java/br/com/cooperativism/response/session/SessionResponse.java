@@ -1,7 +1,7 @@
 package br.com.cooperativism.response.session;
 
 import br.com.cooperativism.dto.SessionDto;
-import br.com.cooperativism.enums.SessionStatus;
+import br.com.cooperativism.enums.SessionStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class SessionResponse extends SessionDto {
 
   @ApiModelProperty("Status")
-  private String status = SessionStatus.STARTED.getValue();
+  private String status = SessionStatusEnum.STARTED.getValue();
 
   public SessionResponse() {
   }

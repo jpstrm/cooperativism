@@ -1,7 +1,11 @@
 package br.com.cooperativism.model;
 
+import br.com.cooperativism.enums.VoteEnum;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
@@ -16,11 +20,12 @@ public class Vote extends AbstractModel implements Serializable {
   private Member member;
 
   @OneToOne(optional = false)
-  @JoinColumn(name = "topic_id", referencedColumnName = "id", nullable = false)
-  private Topic topic;
+  @JoinColumn(name = "session_id", referencedColumnName = "id", nullable = false)
+  private Session session;
 
   @Column(nullable = false)
-  private Boolean vote;
+  @Enumerated(EnumType.STRING)
+  private VoteEnum vote;
 
   public Vote() {}
 
@@ -32,19 +37,19 @@ public class Vote extends AbstractModel implements Serializable {
     this.member = member;
   }
 
-  public Topic getTopic() {
-    return topic;
+  public Session getSession() {
+    return session;
   }
 
-  public void setTopic(Topic topic) {
-    this.topic = topic;
+  public void setSession(Session session) {
+    this.session = session;
   }
 
-  public Boolean getVote() {
+  public VoteEnum getVote() {
     return vote;
   }
 
-  public void setVote(Boolean vote) {
+  public void setVote(VoteEnum vote) {
     this.vote = vote;
   }
 

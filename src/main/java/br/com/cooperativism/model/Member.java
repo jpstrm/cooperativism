@@ -2,7 +2,6 @@ package br.com.cooperativism.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.Max;
 import java.io.Serializable;
 
 @Entity
@@ -13,10 +12,13 @@ public class Member extends AbstractModel implements Serializable {
   private String name;
 
   @Column(nullable = false, unique = true)
-  @Max(11)
   private String cpf;
 
   public Member() {
+  }
+
+  public Member(final String cpf) {
+    this.cpf = cpf;
   }
 
   public String getName() {

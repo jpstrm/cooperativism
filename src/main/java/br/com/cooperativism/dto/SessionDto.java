@@ -1,6 +1,8 @@
 package br.com.cooperativism.dto;
 
+import br.com.cooperativism.helper.ApiHelper;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,7 +29,7 @@ public class SessionDto implements Serializable {
   private LocalDateTime votingEnd;
 
   @ApiModelProperty("Topico")
-  @JsonProperty("topico")
+  @JsonProperty("pauta")
   private TopicDto topic;
 
   public SessionDto() {
@@ -63,6 +65,11 @@ public class SessionDto implements Serializable {
 
   public void setTopic(TopicDto topic) {
     this.topic = topic;
+  }
+
+  @JsonIgnore
+  public boolean isExpired() {
+    return ApiHelper.isDateExpired(votingStart, votingEnd);
   }
 
 }

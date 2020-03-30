@@ -1,6 +1,8 @@
 package br.com.cooperativism.service;
 
 import br.com.cooperativism.converter.VoteConverter;
+import br.com.cooperativism.dto.VoteDto;
+import br.com.cooperativism.enums.VoteEnum;
 import br.com.cooperativism.exception.BusinessException;
 import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.model.Vote;
@@ -20,8 +22,6 @@ public class VoteService {
   @Autowired
   private VoteConverter voteConverter;
 
-  @Autowired
-
   public List<Vote> findAll() {
     return voteRepository.findAll();
   }
@@ -29,15 +29,21 @@ public class VoteService {
   public void vote(final VoteRequest voteRequest) {
     validateRequest(voteRequest);
     final Vote vote = voteConverter.fromRequest(voteRequest);
-
     voteRepository.save(vote);
   }
 
+  public VoteDto findByMemberCpf(final String memberCpf) {
+    Vote vote = voteRepository.findFirstByMemberCpf(memberCpf)
+        .orElseThrow(() -> new NotFoundException("Voto não encontrado para o CPF: ".concat(memberCpf)));
+
+    return voteConverter.toDto(vote);
+  }
+
   private void validateRequest(final VoteRequest voteRequest) {
-    final List<Vote> votes = voteRepository.findByTopicName(voteRequest.getTopicName());
-    if (votes.isEmpty()) {
-      throw new NotFoundException("Pauta não encontrada para votação");
+    if (VoteEnum.find(voteRequest.getVote()).isEmpty()) {
+      throw new BusinessException("Voto inválido - exemplo: Sim/Não");
     }
+
     if (voteRepository.existsByMemberCpf(voteRequest.getMemberCpf())) {
       throw new BusinessException("Associado já votou na Pauta");
     }

@@ -50,4 +50,8 @@ public class Session extends AbstractModel implements Serializable {
     this.topic = topic;
   }
 
+  public boolean isExpired() {
+    return ApiHelper.isDateExpired(votingStart, votingEnd);
+  }
+
 }

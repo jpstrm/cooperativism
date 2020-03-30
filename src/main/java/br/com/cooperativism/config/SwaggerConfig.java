@@ -18,9 +18,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 @Configuration
 @EnableSwagger2
@@ -34,13 +36,16 @@ public class SwaggerConfig {
 
   @Bean
   public Docket customImplementation() {
-    return new Docket(DocumentationType.SWAGGER_2).select()
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
         .apis(RequestHandlerSelectors.basePackage(documentationConfig.getBasePackage()))
         .paths(PathSelectors.any()).build()
         .apiInfo(apiInfo(documentationConfig.getInfo().getTitle(), documentationConfig.getInfo().getDescription(),
             documentationConfig.getVersion()))
         .directModelSubstitute(LocalDate.class, String.class)
-        .additionalModels(typeResolver.resolve(ApiError.class))
+        .directModelSubstitute(LocalDateTime.class, String.class)
+        .alternateTypeRules(newRule(typeResolver.resolve(ApiError.class),
+            typeResolver.resolve(ApiError.class)))
         .useDefaultResponseMessages(false)
         .globalResponseMessage(RequestMethod.GET, getResponseMessages())
         .globalResponseMessage(RequestMethod.POST, getResponseMessages())
@@ -60,7 +65,7 @@ public class SwaggerConfig {
             .code(200).message("Request performed successfully.").build(),
         new ResponseMessageBuilder()
             .code(204).message("Without errors, but empty body.").build(),
-        getErrorMessage(400, "Invalid parameter(s)."),
+        getErrorMessage(400, "Bad Request - Invalid parameter(s)."),
         getErrorMessage(404, "Resource(s) not found."),
         getErrorMessage(408, "Server timeout. Network error."),
         getErrorMessage(500, "Internal server error."));

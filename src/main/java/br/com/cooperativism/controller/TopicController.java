@@ -2,9 +2,9 @@ package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.TopicApi;
 import br.com.cooperativism.converter.TopicConverter;
-import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.request.TopicRequest;
 import br.com.cooperativism.response.topic.TopicListResponse;
+import br.com.cooperativism.response.topic.TopicResponse;
 import br.com.cooperativism.service.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,12 +54,12 @@ public class TopicController implements TopicApi {
 
   @Override
   @GetMapping("/{topicName}")
-  public ResponseEntity<TopicDto> findByName(@PathVariable String topicName) {
+  public ResponseEntity<TopicResponse> findByName(@PathVariable String topicName) {
     logger.info("Request POST /pautas/{}", topicName);
-    final TopicDto topicDto = topicService.findByNameToDto(topicName);
-    logger.info("Response POST /pautas/{} - {}", topicName, topicDto);
+    final TopicResponse response = topicConverter.toResponse(topicService.findByNameToDto(topicName));
+    logger.info("Response POST /pautas/{} - {}", topicName, response);
 
-    return ResponseEntity.status(HttpStatus.OK).body(topicDto);
+    return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
 

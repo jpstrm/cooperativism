@@ -1,8 +1,8 @@
 package br.com.cooperativism.controller.swagger;
 
-import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.request.TopicRequest;
 import br.com.cooperativism.response.topic.TopicListResponse;
+import br.com.cooperativism.response.topic.TopicResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,7 +34,7 @@ public interface TopicApi {
       consumes = "application/json", produces = "application/json")
   @ApiResponses({
       @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
-          response = TopicDto.class)})
-  ResponseEntity<TopicDto> findByName(@ApiParam(name = "Request", example = "Test", required = true) String topicName);
+          response = TopicResponse.class)})
+  ResponseEntity<TopicResponse> findByName(@ApiParam(name = "Request", example = "Test", required = true) String topicName);
 
 }

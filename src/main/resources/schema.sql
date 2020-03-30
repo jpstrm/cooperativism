@@ -34,13 +34,13 @@ CREATE TABLE `session` (
 CREATE TABLE `vote` (
 	`id` BIGINT NOT NULL AUTO_INCREMENT,
 	`member_id` BIGINT NOT NULL UNIQUE,
-	`topic_id` BIGINT NOT NULL UNIQUE,
+	`session_id` BIGINT NOT NULL UNIQUE,
   `result` bit(1) NOT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `vote_fk0` (`member_id`),
-  KEY `vote_fk1` (`topic_id`),
+  KEY `vote_fk1` (`session_id`),
   CONSTRAINT `vote_fk0` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
-  CONSTRAINT `vote_fk1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`)
+  CONSTRAINT `vote_fk1` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`)
 );

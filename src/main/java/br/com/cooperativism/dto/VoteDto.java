@@ -18,9 +18,9 @@ public class VoteDto implements Serializable {
   @JsonProperty("associado")
   private MemberDto member;
 
-  @ApiModelProperty("Pauta")
-  @JsonProperty("pauta")
-  private MemberDto topic;
+  @ApiModelProperty("Sessão")
+  @JsonProperty("sessao")
+  private SessionDto session;
 
   @ApiModelProperty(value = "Voto", example = "SIM")
   @JsonProperty("voto")
@@ -45,12 +45,12 @@ public class VoteDto implements Serializable {
     this.member = member;
   }
 
-  public MemberDto getTopic() {
-    return topic;
+  public SessionDto getSession() {
+    return session;
   }
 
-  public void setTopic(MemberDto topic) {
-    this.topic = topic;
+  public void setSession(SessionDto session) {
+    this.session = session;
   }
 
   public String getVote() {

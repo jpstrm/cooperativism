@@ -1,15 +1,13 @@
 package br.com.cooperativism.converter;
 
 import br.com.cooperativism.dto.SessionDto;
-import br.com.cooperativism.enums.SessionStatus;
-import br.com.cooperativism.helper.ApiHelper;
+import br.com.cooperativism.enums.SessionStatusEnum;
 import br.com.cooperativism.model.Session;
 import br.com.cooperativism.response.session.SessionListResponse;
 import br.com.cooperativism.response.session.SessionResponse;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +22,8 @@ public class SessionConverter extends DefaultConverter<Session, SessionDto> {
 
   public SessionResponse toResponse(SessionDto sessionDto) {
     final SessionResponse response = toAny(sessionDto, SessionResponse.class);
-    final LocalDateTime currentDate = ApiHelper.getNow();
-    if (currentDate.compareTo(sessionDto.getVotingEnd()) > 0) {
-      response.setStatus(SessionStatus.EXPIRED.getValue());
+    if (sessionDto.isExpired()) {
+      response.setStatus(SessionStatusEnum.EXPIRED.getValue());
     }
 
     return response;
