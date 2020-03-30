@@ -51,7 +51,7 @@ public class Session extends AbstractModel implements Serializable {
   }
 
   public boolean isExpired() {
-    return ApiHelper.isDateExpired(votingStart, votingEnd);
+    return ApiHelper.isDateExpired(votingEnd);
   }
 
 }

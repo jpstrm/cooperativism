@@ -32,6 +32,7 @@ public class SessionService {
   public void create(final SessionRequest sessionRequest) {
     final Topic topic = topicService.findById(sessionRequest.getTopicId());
     final Session session = sessionRepository.findFirstByTopicId(sessionRequest.getTopicId())
+        .map(this::filterSession)
         .orElse(new Session());
     session.setTopic(topic);
     session.setVotingEnd(session.getVotingStart().plusMinutes(sessionRequest.getDuration()));
@@ -41,13 +42,14 @@ public class SessionService {
 
   public Session findValidByTopicName(final String topicName) {
     return sessionRepository.findFirstByTopicName(topicName)
-        .map(s -> {
-          if (s.isExpired()) {
-            throw new BusinessException("Sessão expirada às ".concat(s.getVotingEnd().toString()));
-          }
-          return s;
-        })
+        .map(this::filterSession)
         .orElseThrow(() -> new BusinessException("Sessão não encontrada para essa Pauta: ".concat(topicName)));
   }
 
+  public Session filterSession(final Session session) {
+    if (session.isExpired()) {
+      throw new BusinessException("Sessão expirada às ".concat(session.getVotingEnd().toString()));
+    }
+    return session;
+  }
 }

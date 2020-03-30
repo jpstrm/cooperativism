@@ -28,7 +28,7 @@ public class SessionDto implements Serializable {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
   private LocalDateTime votingEnd;
 
-  @ApiModelProperty("Topico")
+  @ApiModelProperty("Pauta")
   @JsonProperty("pauta")
   private TopicDto topic;
 
@@ -69,7 +69,7 @@ public class SessionDto implements Serializable {
 
   @JsonIgnore
   public boolean isExpired() {
-    return ApiHelper.isDateExpired(votingStart, votingEnd);
+    return ApiHelper.isDateExpired(votingEnd);
   }
 
 }

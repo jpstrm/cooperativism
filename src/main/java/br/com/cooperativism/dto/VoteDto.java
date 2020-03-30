@@ -24,7 +24,7 @@ public class VoteDto implements Serializable {
 
   @ApiModelProperty(value = "Voto", example = "SIM")
   @JsonProperty("voto")
-  private String vote;
+  protected String vote;
 
   public VoteDto() {
   }

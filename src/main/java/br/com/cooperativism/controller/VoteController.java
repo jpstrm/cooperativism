@@ -2,9 +2,9 @@ package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.VoteApi;
 import br.com.cooperativism.converter.VoteConverter;
-import br.com.cooperativism.dto.VoteDto;
 import br.com.cooperativism.request.VoteRequest;
 import br.com.cooperativism.response.vote.VoteListResponse;
+import br.com.cooperativism.response.vote.VoteResponse;
 import br.com.cooperativism.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,12 +54,12 @@ public class VoteController implements VoteApi {
 
   @Override
   @GetMapping("/{memberCpf}")
-  public ResponseEntity<VoteDto> findByMemberCpf(@PathVariable String memberCpf) {
+  public ResponseEntity<VoteResponse> findByMemberCpf(@PathVariable String memberCpf) {
     logger.info("Request POST /votos/{}", memberCpf);
-    final VoteDto voteDto = voteService.findByMemberCpf(memberCpf);
-    logger.info("Response POST /votos/{} - {}", memberCpf, voteDto);
+    final VoteResponse response = voteConverter.toResponse(voteService.findByMemberCpf(memberCpf));
+    logger.info("Response POST /votos/{} - {}", memberCpf, response);
 
-    return ResponseEntity.status(HttpStatus.OK).body(voteDto);
+    return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
 

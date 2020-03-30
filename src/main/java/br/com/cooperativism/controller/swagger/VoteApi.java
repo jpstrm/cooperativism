@@ -1,8 +1,8 @@
 package br.com.cooperativism.controller.swagger;
 
-import br.com.cooperativism.dto.VoteDto;
 import br.com.cooperativism.request.VoteRequest;
 import br.com.cooperativism.response.vote.VoteListResponse;
+import br.com.cooperativism.response.vote.VoteResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,7 +34,8 @@ public interface VoteApi {
       consumes = "application/json", produces = "application/json")
   @ApiResponses({
       @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
-          response = VoteDto.class)})
-  ResponseEntity<VoteDto> findByMemberCpf(@ApiParam(name = "Request", example = "12345678912", required = true) String memberCpf);
+          response = VoteResponse.class)})
+  ResponseEntity<VoteResponse> findByMemberCpf(
+      @ApiParam(name = "Request", example = "12345678912", required = true) String memberCpf);
 
 }

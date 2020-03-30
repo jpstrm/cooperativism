@@ -16,8 +16,8 @@ public class SessionRequest {
   private Integer duration = 1;
 
   @ApiModelProperty(value = "Id da Pauta", example = "1")
-  @NotNull(message = "O camo 'idTopico' não pode ser nulo")
-  @JsonProperty("idTopico")
+  @NotNull(message = "O campo 'idPauta' não pode ser nulo")
+  @JsonProperty("idPauta")
   private Long topicId;
 
   public SessionRequest() {

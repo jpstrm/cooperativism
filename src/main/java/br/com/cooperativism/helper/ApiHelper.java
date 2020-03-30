@@ -12,8 +12,8 @@ public class ApiHelper {
     return LocalDateTime.parse(formatted, dateTimeFormatter);
   }
 
-  public static boolean isDateExpired(LocalDateTime dateTime, LocalDateTime dateTime2) {
-    return dateTime.compareTo(dateTime2) > 0;
+  public static boolean isDateExpired(LocalDateTime toCompare) {
+    return getNow().compareTo(toCompare) > 0;
   }
 
 }

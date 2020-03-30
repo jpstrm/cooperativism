@@ -4,6 +4,7 @@ import br.com.cooperativism.dto.VoteDto;
 import br.com.cooperativism.model.Vote;
 import br.com.cooperativism.request.VoteRequest;
 import br.com.cooperativism.response.vote.VoteListResponse;
+import br.com.cooperativism.response.vote.VoteResponse;
 import br.com.cooperativism.service.MemberService;
 import br.com.cooperativism.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,13 @@ public class VoteConverter extends DefaultConverter<Vote, VoteDto> {
     return vote;
   }
 
+  public VoteResponse toResponse(VoteDto voteDto) {
+    return toAny(voteDto, VoteResponse.class);
+  }
+
+
   public VoteListResponse toListResponse(List<Vote> votes) {
-    final List<VoteDto> votesResponse = toDtoList(votes);
+    final List<VoteResponse> votesResponse = toList(votes, VoteResponse.class);
 
     return new VoteListResponse(votesResponse.size(), votesResponse);
   }

@@ -1,6 +1,5 @@
 package br.com.cooperativism.response.vote;
 
-import br.com.cooperativism.dto.VoteDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,14 +18,14 @@ public class VoteListResponse implements Serializable {
 
   @ApiModelProperty("Lista de Votos")
   @JsonProperty("votos")
-  private List<VoteDto> voteDtos = new ArrayList<>();
+  private List<VoteResponse> votes = new ArrayList<>();
 
   public VoteListResponse() {
   }
 
-  public VoteListResponse(Integer total, List<VoteDto> voteDtos) {
+  public VoteListResponse(Integer total, List<VoteResponse> votes) {
     this.total = total;
-    this.voteDtos = voteDtos;
+    this.votes = votes;
   }
 
   public Integer getTotal() {
@@ -37,12 +36,12 @@ public class VoteListResponse implements Serializable {
     this.total = total;
   }
 
-  public List<VoteDto> getVoteDtos() {
-    return voteDtos;
+  public List<VoteResponse> getVotes() {
+    return votes;
   }
 
-  public void setVoteDtos(List<VoteDto> voteDtos) {
-    this.voteDtos = voteDtos;
+  public void setVotes(List<VoteResponse> votes) {
+    this.votes = votes;
   }
 
 }

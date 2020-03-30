@@ -19,7 +19,11 @@ public enum VoteEnum {
   }
 
   public static Optional<VoteEnum> find(String value){
-    final String valueFiltered = value.replace("ã", "a").toUpperCase();
+    final String valueFiltered = value
+        .replace("YES", "SIM")
+        .replace("NO", "NAO")
+        .replace("ã", "a")
+        .toUpperCase();
     return Arrays.stream(values())
         .filter(v -> v.getValue().equals(valueFiltered))
         .findFirst();
