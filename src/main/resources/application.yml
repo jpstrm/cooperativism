@@ -36,4 +36,4 @@ spring:
     password: db1234567
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none

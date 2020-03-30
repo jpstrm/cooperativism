@@ -25,13 +25,22 @@ public abstract class DefaultConverter<T extends Serializable, D extends Seriali
     this.dtoClazz = dtoClazz;
   }
 
+  public <Any> Any toAny(Object t, Class<Any> anyClass) {
+    return modelMapper.map(t, anyClass);
+  }
+
   public D toDto(T t) {
-    return modelMapper.map(t, dtoClazz);
+    return toAny(t, dtoClazz);
   }
 
   public List<D> toDtoList(List<T> tList) {
+
+    return toList(tList, dtoClazz);
+  }
+
+  public <Any> List<Any> toList(List<?> tList, Class<Any> anyClass) {
     return tList.stream()
-        .map(m -> modelMapper.map(m, dtoClazz))
+        .map(m -> modelMapper.map(m, anyClass))
         .collect(Collectors.toList());
   }
 

@@ -1,5 +1,6 @@
 package br.com.cooperativism.advice;
 
+import br.com.cooperativism.exception.AbstractException;
 import br.com.cooperativism.exception.ApiException;
 import br.com.cooperativism.exception.error.ApiError;
 import br.com.cooperativism.exception.error.ApiError.ApiErrorBuilder;
@@ -34,11 +35,18 @@ public class CooperativismoAdvice extends ResponseEntityExceptionHandler {
   public ResponseEntity<ApiError> handleApiException(final ApiException ex) {
     final String msg = "Api Error";
     logger.error(MESSAGE_FORMAT, msg, ex.getLocalizedMessage());
-    ApiError error = ApiErrorBuilder.builder()
-        .message(msg)
-        .detail(ex.getLocalizedMessage())
-        .status(ex.getHttpStatus())
-        .build();
+    ApiError error = getError(msg, ex);
+    return ResponseEntity.status(error.getStatus()).body(error);
+  }
+
+  /**
+   * Erros da Api.
+   */
+  @ExceptionHandler(AbstractException.class)
+  public ResponseEntity<ApiError> handleCustomException(final AbstractException ex) {
+    final String msg = "Api Error";
+    logger.error(MESSAGE_FORMAT, msg, ex.getLocalizedMessage());
+    ApiError error = getError(msg, ex);
     return ResponseEntity.status(error.getStatus()).body(error);
   }
 
@@ -77,5 +85,20 @@ public class CooperativismoAdvice extends ResponseEntityExceptionHandler {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
   }
 
+  private ApiError getError(final String msg, final AbstractException ex) {
+    return getError(msg, ex.getLocalizedMessage(), ex.getHttpStatus());
+  }
+
+  private ApiError getError(final String msg, final ApiException ex) {
+    return getError(msg, ex.getLocalizedMessage(), ex.getHttpStatus());
+  }
+
+  private ApiError getError(final String msg, final String detail, final HttpStatus httpStatus) {
+    return ApiErrorBuilder.builder()
+        .message(msg)
+        .detail(detail)
+        .status(httpStatus)
+        .build();
+  }
 
 }

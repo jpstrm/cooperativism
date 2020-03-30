@@ -1,6 +1,7 @@
 package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.SessionApi;
+import br.com.cooperativism.converter.SessionConverter;
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.request.SessionRequest;
 import br.com.cooperativism.response.SessionListResponse;
@@ -28,12 +29,15 @@ public class SessionController implements SessionApi {
   @Autowired
   private SessionService sessionService;
 
+  @Autowired
+  private SessionConverter sessionConverter;
+
   @Override
   @GetMapping
   public ResponseEntity<SessionListResponse> findAll() {
     logger.info("Request GET /sessoes");
     final List<SessionDto> sessionDtos = sessionService.findAll();
-    final SessionListResponse response = new SessionListResponse(sessionDtos.size(), sessionDtos);
+    final SessionListResponse response =  sessionConverter.toListResponse(sessionDtos);
     logger.info("Response GET /sessoes - tamanho: {}", sessionDtos.size());
 
     return ResponseEntity.status(HttpStatus.OK).body(response);

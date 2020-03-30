@@ -1,6 +1,5 @@
 package br.com.cooperativism.response;
 
-import br.com.cooperativism.dto.SessionDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,13 +15,13 @@ public class SessionListResponse {
 
   @ApiModelProperty("Lista de Sessões")
   @JsonProperty("sessoes")
-  private List<SessionDto> sessionDtos = new ArrayList<>();
+  private List<SessionResponse> sessions = new ArrayList<>();
 
   public SessionListResponse() {}
 
-  public SessionListResponse(Integer total, List<SessionDto> sessionDtos) {
+  public SessionListResponse(Integer total, List<SessionResponse> sessionsResponse) {
     this.total = total;
-    this.sessionDtos = sessionDtos;
+    this.sessions = sessionsResponse;
   }
 
   public Integer getTotal() {
@@ -33,12 +32,12 @@ public class SessionListResponse {
     this.total = total;
   }
 
-  public List<SessionDto> getSessionDtos() {
-    return sessionDtos;
+  public List<SessionResponse> getSessions() {
+    return sessions;
   }
 
-  public void setSessionDtos(List<SessionDto> sessionDtos) {
-    this.sessionDtos = sessionDtos;
+  public void setSessions(List<SessionResponse> sessions) {
+    this.sessions = sessions;
   }
 
 }

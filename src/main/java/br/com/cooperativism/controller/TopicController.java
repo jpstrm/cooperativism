@@ -1,6 +1,7 @@
 package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.TopicApi;
+import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
 import br.com.cooperativism.request.TopicRequest;
 import br.com.cooperativism.response.TopicListResponse;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/pautas")
@@ -29,13 +29,15 @@ public class TopicController implements TopicApi {
   @Autowired
   private TopicService topicService;
 
+  @Autowired
+  private TopicConverter topicConverter;
+
   @Override
   @GetMapping
   public ResponseEntity<TopicListResponse> findAll() {
     logger.info("Request GET /pautas");
-    final List<TopicDto> topicDtos = topicService.findAll();
-    final TopicListResponse response = new TopicListResponse(topicDtos.size(), topicDtos);
-    logger.info("Response GET /pautas - tamanho: {}", topicDtos.size());
+    final TopicListResponse response = topicConverter.toListResponse(topicService.findAll());
+    logger.info("Response GET /pautas - tamanho: {}", response.getTotal());
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }

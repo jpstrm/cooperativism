@@ -20,9 +20,8 @@ public class TopicService {
   @Autowired
   private TopicConverter topicConverter;
 
-  public List<TopicDto> findAll() {
-    final List<Topic> members = topicRepository.findAll();
-    return topicConverter.toDtoList(members);
+  public List<Topic> findAll() {
+    return topicRepository.findAll();
   }
 
   public void create(final TopicRequest topicRequest) {

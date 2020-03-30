@@ -1,11 +1,12 @@
 package br.com.cooperativism.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @ApiModel("Sessão")
 public class SessionDto implements Serializable {
@@ -17,11 +18,13 @@ public class SessionDto implements Serializable {
 
   @ApiModelProperty("Início da votação")
   @JsonProperty("inicioVotacao")
-  private Date votingStart;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
+  private LocalDateTime votingStart;
 
   @ApiModelProperty("Fim da votação")
   @JsonProperty("fimVotacao")
-  private Date votingEnd;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
+  private LocalDateTime votingEnd;
 
   @ApiModelProperty("Topico")
   @JsonProperty("topico")
@@ -38,19 +41,19 @@ public class SessionDto implements Serializable {
     this.id = id;
   }
 
-  public Date getVotingStart() {
+  public LocalDateTime getVotingStart() {
     return votingStart;
   }
 
-  public void setVotingStart(Date votingStart) {
+  public void setVotingStart(LocalDateTime votingStart) {
     this.votingStart = votingStart;
   }
 
-  public Date getVotingEnd() {
+  public LocalDateTime getVotingEnd() {
     return votingEnd;
   }
 
-  public void setVotingEnd(Date votingEnd) {
+  public void setVotingEnd(LocalDateTime votingEnd) {
     this.votingEnd = votingEnd;
   }
 

@@ -9,8 +9,6 @@ import br.com.cooperativism.request.SessionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,16 +33,9 @@ public class SessionService {
     final Session session = sessionRepository.findFirstByTopicId(sessionRequest.getTopicId())
         .orElse(new Session());
     session.setTopic(topic);
-    session.setVotingEnd(getExtraDate(sessionRequest.getDuration()));
+    session.setVotingEnd(session.getVotingStart().plusMinutes(sessionRequest.getDuration()));
 
     sessionRepository.save(session);
-  }
-
-  private Date getExtraDate(Integer minutes) {
-    final Calendar calendar = Calendar.getInstance();
-    calendar.add(Calendar.MINUTE, minutes);
-
-    return calendar.getTime();
   }
 
 }

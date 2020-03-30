@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
-public class NotFoundException extends RuntimeException implements Serializable {
+public class NotFoundException extends AbstractException implements Serializable {
 
   private static final long serialVersionUID = -7236793513290576784L;
 

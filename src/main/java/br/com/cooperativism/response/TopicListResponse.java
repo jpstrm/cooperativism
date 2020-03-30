@@ -1,6 +1,5 @@
 package br.com.cooperativism.response;
 
-import br.com.cooperativism.dto.TopicDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,13 +15,14 @@ public class TopicListResponse {
 
   @ApiModelProperty("Lista de Pautas")
   @JsonProperty("pautas")
-  private List<TopicDto> topicDtos = new ArrayList<>();
+  private List<TopicResponse> topicResponses = new ArrayList<>();
 
-  public TopicListResponse() {}
+  public TopicListResponse() {
+  }
 
-  public TopicListResponse(Integer total, List<TopicDto> topicDtos) {
+  public TopicListResponse(Integer total, List<TopicResponse> topicsResponse) {
     this.total = total;
-    this.topicDtos = topicDtos;
+    this.topicResponses = topicsResponse;
   }
 
   public Integer getTotal() {
@@ -33,12 +33,12 @@ public class TopicListResponse {
     this.total = total;
   }
 
-  public List<TopicDto> getTopicDtos() {
-    return topicDtos;
+  public List<TopicResponse> getTopicResponses() {
+    return topicResponses;
   }
 
-  public void setTopicDtos(List<TopicDto> topicDtos) {
-    this.topicDtos = topicDtos;
+  public void setTopicResponses(List<TopicResponse> topicResponses) {
+    this.topicResponses = topicResponses;
   }
 
 }

@@ -1,12 +1,13 @@
 package br.com.cooperativism.model;
 
+import br.com.cooperativism.helper.ApiHelper;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Session extends AbstractModel implements Serializable {
@@ -14,10 +15,10 @@ public class Session extends AbstractModel implements Serializable {
   private static final long serialVersionUID = 7211846874754010863L;
 
   @Column(name = "voting_start", nullable = false)
-  private Date votingStart = Calendar.getInstance().getTime();
+  private LocalDateTime votingStart = ApiHelper.getNow();
 
   @Column(name = "voting_end", nullable = false)
-  private Date votingEnd = Calendar.getInstance().getTime();
+  private LocalDateTime votingEnd;
 
   @OneToOne(optional = false)
   @JoinColumn(name = "topic_id", referencedColumnName = "id", nullable = false)
@@ -25,23 +26,19 @@ public class Session extends AbstractModel implements Serializable {
 
   public Session() {}
 
-  public Session(Topic topic) {
-    this.topic = topic;
-  }
-
-  public Date getVotingStart() {
+  public LocalDateTime getVotingStart() {
     return votingStart;
   }
 
-  public void setVotingStart(Date votingStart) {
+  public void setVotingStart(LocalDateTime votingStart) {
     this.votingStart = votingStart;
   }
 
-  public Date getVotingEnd() {
+  public LocalDateTime getVotingEnd() {
     return votingEnd;
   }
 
-  public void setVotingEnd(Date votingEnd) {
+  public void setVotingEnd(LocalDateTime votingEnd) {
     this.votingEnd = votingEnd;
   }
 
