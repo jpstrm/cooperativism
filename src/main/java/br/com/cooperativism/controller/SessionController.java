@@ -47,7 +47,7 @@ public class SessionController implements SessionApi {
 
   @Override
   @PostMapping
-  public ResponseEntity<Void> create(@Valid @RequestBody SessionRequest sessionRequest) {
+  public ResponseEntity<Void> create(@Valid @RequestBody final SessionRequest sessionRequest) {
     logger.info("Request POST /sessoes");
     sessionService.create(sessionRequest);
     logger.info("Response POST /sessoes - msg: sucesso");

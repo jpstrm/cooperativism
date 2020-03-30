@@ -44,7 +44,7 @@ public class TopicController implements TopicApi {
 
   @Override
   @PostMapping
-  public ResponseEntity<Void> create(@Valid @RequestBody TopicRequest topicRequest) {
+  public ResponseEntity<Void> create(@Valid @RequestBody final TopicRequest topicRequest) {
     logger.info("Request POST /pautas");
     topicService.create(topicRequest);
     logger.info("Response POST /pautas - msg: sucesso");
@@ -54,7 +54,7 @@ public class TopicController implements TopicApi {
 
   @Override
   @GetMapping("/{topicName}")
-  public ResponseEntity<TopicDto> findByName(@PathVariable String topicName) {
+  public ResponseEntity<TopicDto> findByName(@PathVariable final String topicName) {
     logger.info("Request POST /pautas/{}", topicName);
     final TopicDto response = topicService.findByNameToDto(topicName);
     logger.info("Response POST /pautas/{} - {}", topicName, response);
