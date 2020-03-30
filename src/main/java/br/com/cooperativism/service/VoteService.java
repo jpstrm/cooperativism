@@ -32,7 +32,7 @@ public class VoteService {
     voteRepository.save(vote);
   }
 
-  public VoteDto findByMemberCpf(final String memberCpf) {
+  public VoteDto findByMemberCpfToDto(final String memberCpf) {
     Vote vote = voteRepository.findFirstByMemberCpf(memberCpf)
         .orElseThrow(() -> new NotFoundException("Voto não encontrado para o CPF: ".concat(memberCpf)));
 
@@ -47,6 +47,11 @@ public class VoteService {
     if (voteRepository.existsByMemberCpf(voteRequest.getMemberCpf())) {
       throw new BusinessException("Associado já votou na Pauta");
     }
+  }
+
+  public List<Vote> findBySessionId(final Long sessionId) {
+
+    return voteRepository.findBySessionId(sessionId);
   }
 
 }

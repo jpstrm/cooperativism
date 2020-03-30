@@ -38,4 +38,13 @@ public interface VoteApi {
   ResponseEntity<VoteResponse> findByMemberCpf(
       @ApiParam(name = "Request", example = "12345678912", required = true) String memberCpf);
 
+  @ApiOperation(value = "Encontrar um voto por Id da Sessão",
+      notes = "Operação para encontrar uma voto pelo Id de uma Sessão.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
+          response = VoteListResponse.class)})
+  ResponseEntity<VoteListResponse> findBySessionId(
+      @ApiParam(name = "Id da Sessão", example = "1", required = true) Long sessionId);
+
 }

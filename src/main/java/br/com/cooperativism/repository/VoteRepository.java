@@ -16,4 +16,8 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
   List<Vote> findBySessionTopicId(final Long topicId);
 
+  Optional<Vote> findFirstBySessionId(final Long sessionId);
+
+  List<Vote> findBySessionId(final Long sessionId);
+
 }

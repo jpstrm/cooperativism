@@ -56,11 +56,20 @@ public class VoteController implements VoteApi {
   @GetMapping("/{memberCpf}")
   public ResponseEntity<VoteResponse> findByMemberCpf(@PathVariable String memberCpf) {
     logger.info("Request POST /votos/{}", memberCpf);
-    final VoteResponse response = voteConverter.toResponse(voteService.findByMemberCpf(memberCpf));
+    final VoteResponse response = voteConverter.toResponse(voteService.findByMemberCpfToDto(memberCpf));
     logger.info("Response POST /votos/{} - {}", memberCpf, response);
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
+  @Override
+  @GetMapping("/sessoes/{sessionId}")
+  public ResponseEntity<VoteListResponse> findBySessionId(@PathVariable final Long sessionId) {
+    logger.info("Request POST /votos/sessoes/{}", sessionId);
+    final VoteListResponse response = voteConverter.toListResponse(voteService.findBySessionId(sessionId));
+    logger.info("Response POST /votos/sessoes/{} - {}", sessionId, response);
+
+    return ResponseEntity.status(HttpStatus.OK).body(response);
+  }
 
 }
