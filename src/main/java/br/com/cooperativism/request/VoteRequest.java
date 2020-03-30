@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @ApiModel("Pauta request")
@@ -14,13 +16,14 @@ public class VoteRequest implements Serializable {
   private static final long serialVersionUID = 4753561587146476862L;
 
   @ApiModelProperty(value = "Nome da Pauta", example = "Test")
-  @NotBlank(message = "O campo `nome` não poder ser vazio")
-  @JsonProperty("nomePauta")
-  private String topicName;
+  @NotNull(message = "O campo `idPauta` não poder ser nulo")
+  @JsonProperty("idPauta")
+  private Long topicId;
 
   @ApiModelProperty(value = "CPF do Associado", example = "12345678912")
   @NotBlank(message = "O campo `cpf` não poder ser vazio")
   @JsonProperty("cpf")
+  @Size(min = 11, max = 11, message = "O campo 'cpf' deve possuir 11 dígitos.")
   private String memberCpf;
 
   @ApiModelProperty(value = "Voto", example = "SIM")
@@ -31,12 +34,12 @@ public class VoteRequest implements Serializable {
   public VoteRequest() {
   }
 
-  public String getTopicName() {
-    return topicName;
+  public Long getTopicId() {
+    return topicId;
   }
 
-  public void setTopicName(String topicName) {
-    this.topicName = topicName;
+  public void setTopicId(Long topicId) {
+    this.topicId = topicId;
   }
 
   public String getMemberCpf() {

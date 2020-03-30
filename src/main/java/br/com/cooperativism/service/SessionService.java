@@ -3,6 +3,7 @@ package br.com.cooperativism.service;
 import br.com.cooperativism.converter.SessionConverter;
 import br.com.cooperativism.dto.SessionDto;
 import br.com.cooperativism.exception.BusinessException;
+import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.model.Session;
 import br.com.cooperativism.model.Topic;
 import br.com.cooperativism.repository.SessionRepository;
@@ -26,30 +27,51 @@ public class SessionService {
 
   public List<SessionDto> findAll() {
     final List<Session> sessions = sessionRepository.findAll();
+
     return sessionConverter.toDtoList(sessions);
   }
 
   public void create(final SessionRequest sessionRequest) {
-    final Topic topic = topicService.findById(sessionRequest.getTopicId());
     final Session session = sessionRepository.findFirstByTopicId(sessionRequest.getTopicId())
         .map(this::filterSession)
         .orElse(new Session());
+    final Topic topic = topicService.findById(sessionRequest.getTopicId());
     session.setTopic(topic);
     session.setVotingEnd(session.getVotingStart().plusMinutes(sessionRequest.getDuration()));
 
     sessionRepository.save(session);
   }
 
-  public Session findValidByTopicName(final String topicName) {
-    return sessionRepository.findFirstByTopicName(topicName)
+  public Session findValidByTopicId(final Long topicId) {
+
+    return sessionRepository.findFirstByTopicId(topicId)
         .map(this::filterSession)
-        .orElseThrow(() -> new BusinessException("Sessão não encontrada para essa Pauta: ".concat(topicName)));
+        .orElseThrow(() -> throwNotFound(topicId));
   }
 
   public Session filterSession(final Session session) {
     if (session.isExpired()) {
-      throw new BusinessException("Sessão expirada às ".concat(session.getVotingEnd().toString()));
+      final String msg = String.format("%s '%s' às %s", "Sessão expirada para a Pauta",
+          session.getTopic().getId(), session.getVotingEnd().toString());
+      throw new BusinessException(msg);
     }
+
     return session;
   }
+
+  public Session findByTopicId(final Long topicId) {
+
+    return sessionRepository.findFirstByTopicId(topicId)
+        .orElseThrow(() -> throwNotFound(topicId));
+  }
+
+  public SessionDto findByTopicIdToDto(final Long topicId) {
+
+    return sessionConverter.toDto(findByTopicId(topicId));
+  }
+
+  private NotFoundException throwNotFound(final Long topicId) {
+    throw new NotFoundException("Sessão não encontrada para essa Pauta: " + topicId);
+  }
+
 }

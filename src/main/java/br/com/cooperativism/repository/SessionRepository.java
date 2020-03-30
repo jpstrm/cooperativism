@@ -11,6 +11,6 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
   Optional<Session> findFirstByTopicId(final Long topicId);
 
-  Optional<Session> findFirstByTopicName(final String topicName);
+  Optional<Session> findFirstByTopicId(final String topicName);
 
 }

@@ -2,6 +2,7 @@ package br.com.cooperativism.controller.swagger;
 
 import br.com.cooperativism.request.SessionRequest;
 import br.com.cooperativism.response.session.SessionListResponse;
+import br.com.cooperativism.response.session.SessionResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -27,5 +28,13 @@ public interface SessionApi {
       @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
           response = Void.class)})
   ResponseEntity<Void> create(@ApiParam(name = "Request", required = true) SessionRequest sessionRequest);
+
+  @ApiOperation(value = "Encontrar uma Sessão",
+      notes = "Operação para encontrar uma sessão pelo Id da Pauta.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
+          response = SessionResponse.class)})
+  ResponseEntity<SessionResponse> findByTopicId(@ApiParam(name = "Id da Pauta", required = true) Long topicId);
 
 }
