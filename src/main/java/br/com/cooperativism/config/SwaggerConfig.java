@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 @Configuration
 @EnableSwagger2
@@ -44,8 +43,7 @@ public class SwaggerConfig {
             documentationConfig.getVersion()))
         .directModelSubstitute(LocalDate.class, String.class)
         .directModelSubstitute(LocalDateTime.class, String.class)
-        .alternateTypeRules(newRule(typeResolver.resolve(ApiError.class),
-            typeResolver.resolve(ApiError.class)))
+        .additionalModels(typeResolver.resolve(ApiError.class))
         .useDefaultResponseMessages(false)
         .globalResponseMessage(RequestMethod.GET, getResponseMessages())
         .globalResponseMessage(RequestMethod.POST, getResponseMessages())
@@ -72,8 +70,11 @@ public class SwaggerConfig {
   }
 
   private ResponseMessage getErrorMessage(Integer code, String message) {
-    return new ResponseMessageBuilder().code(code).message(message)
-        .responseModel(new ModelRef("ApiError")).build();
+    return new ResponseMessageBuilder()
+        .code(code)
+        .message(message)
+        .responseModel(new ModelRef("Api Error"))
+        .build();
   }
 
 }

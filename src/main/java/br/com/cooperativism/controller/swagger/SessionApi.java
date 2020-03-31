@@ -35,6 +35,6 @@ public interface SessionApi {
   @ApiResponses({
       @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
           response = SessionResponse.class)})
-  ResponseEntity<SessionResponse> findByTopicId(@ApiParam(name = "Id da Pauta", required = true) Long topicId);
+  ResponseEntity<SessionResponse> findByTopicId(@ApiParam(name = "Id da Pauta", example = "1", required = true) Long topicId);
 
 }

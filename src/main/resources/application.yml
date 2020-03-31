@@ -26,14 +26,14 @@ spring:
   datasource:
     continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:cooperativism}?reconnect=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     tomcat:
       test-on-borrow: true
       test-on-connect: true
       validation-query: SELECT 1 FROM DUAL
       init-s-q-l: SELECT 1 FROM DUAL
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:cooperativism}?reconnect=true
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: none

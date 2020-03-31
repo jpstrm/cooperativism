@@ -25,6 +25,9 @@ public class ApiError implements Serializable {
   @ApiModelProperty(notes = "Error detail")
   private String detail;
 
+  public ApiError() {
+  }
+
   public static long getSerialVersionUID() {
     return serialVersionUID;
   }

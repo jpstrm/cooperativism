@@ -10,12 +10,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@ApiModel("Pauta request")
+@ApiModel("Voto request")
 public class VoteRequest implements Serializable {
 
   private static final long serialVersionUID = 4753561587146476862L;
 
-  @ApiModelProperty(value = "Nome da Pauta", example = "Test")
+  @ApiModelProperty(value = "Id da Pauta", example = "1")
   @NotNull(message = "O campo `idPauta` não poder ser nulo")
   @JsonProperty("idPauta")
   private Long topicId;
