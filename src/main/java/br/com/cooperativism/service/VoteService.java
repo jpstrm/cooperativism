@@ -41,9 +41,9 @@ public class VoteService {
   }
 
   public void sendVote(final VoteRequest voteRequest) {
+    validateVote(voteRequest);
     Vote vote = voteConverter.fromRequest(voteRequest);
     vote = findByTopicIdAndMemberCpf(vote);
-    validateVote(voteRequest, vote);
     voteRunner.sendVote(vote);
     voteRepository.save(vote);
   }
@@ -68,7 +68,7 @@ public class VoteService {
     return voteConverter.toDto(vote);
   }
 
-  private void validateVote(final VoteRequest voteRequest, final Vote vote) {
+  private void validateVote(final VoteRequest voteRequest) {
     if (VoteEnum.find(voteRequest.getVote()).isEmpty()) {
       throw new BusinessException("Voto inválido - exemplo: Sim/Não");
     }
