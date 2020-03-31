@@ -58,9 +58,9 @@ public class SessionController implements SessionApi {
   @Override
   @GetMapping("/pautas/{topicId}")
   public ResponseEntity<SessionResponse> findByTopicId(@PathVariable final Long topicId) {
-    logger.info("Request POST /sessoes/pautas/{}", topicId);
+    logger.info("Request GET /sessoes/pautas/{}", topicId);
     final SessionResponse response = sessionConverter.toResponse(sessionService.findByTopicIdToDto(topicId));
-    logger.info("Response POST /sessoes/pautas/{} - msg: sucesso", topicId);
+    logger.info("Response GET /sessoes/pautas/{} - msg: sucesso", topicId);
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }

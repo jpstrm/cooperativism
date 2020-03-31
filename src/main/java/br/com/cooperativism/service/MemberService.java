@@ -24,6 +24,7 @@ public class MemberService {
 
   public List<MemberDto> findAll() {
     final List<Member> members = memberRepository.findAll();
+
     return memberConverter.toDtoList(members);
   }
 
@@ -34,6 +35,11 @@ public class MemberService {
         .orElse(new Member(cpf));
 
     return memberRepository.save(member);
+  }
+
+  public Boolean isCpfValid(String cpf) {
+
+    return userClient.isCpfValid(cpf).block();
   }
 
 }

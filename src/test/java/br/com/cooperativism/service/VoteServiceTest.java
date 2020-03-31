@@ -2,6 +2,7 @@ package br.com.cooperativism.service;
 
 import br.com.cooperativism.converter.VoteConverter;
 import br.com.cooperativism.enums.VoteEnum;
+import br.com.cooperativism.enums.VoteStatusEnum;
 import br.com.cooperativism.exception.BusinessException;
 import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.mock.vote.VoteMock;
@@ -41,25 +42,26 @@ class VoteServiceTest {
   private VoteConverter voteConverter;
 
   private VoteRequest voteRequest;
+  private Vote vote;
   private String memberCpf = "12345678912";
 
   @BeforeEach
   public void beforeEach() {
     voteRequest = VoteRequestMock.getRandom("sim");
-
+    vote = VoteMock.getRandom("Test", VoteEnum.YES);
   }
 
   @Test
   public void shouldVote() {
-    Vote vote = VoteMock.getRandom("Test", VoteEnum.YES);
     VoteRequest voteRequest = VoteRequestMock.getRandom("SIM");
 
     when(voteConverter.fromRequest(isA(VoteRequest.class)))
         .thenReturn(vote);
-    when(voteRepository.existsByMemberCpf(anyString()))
+    when(voteRepository.existsBySessionTopicIdAndMemberCpfAndStatus(voteRequest.getTopicId(), anyString(),
+        isA(VoteStatusEnum.class)))
         .thenReturn(false);
 
-    voteService.vote(voteRequest);
+    voteService.vote(vote);
 
     ArgumentCaptor<Vote> captor = ArgumentCaptor.forClass(Vote.class);
     verify(voteRepository, times(1)).save(captor.capture());
@@ -83,16 +85,17 @@ class VoteServiceTest {
 
   @Test
   public void throwErrorIfMemberAlreadyVoted() {
-    when(voteRepository.existsByMemberCpf(memberCpf))
+    when(voteRepository.existsBySessionTopicIdAndMemberCpfAndStatus(voteRequest.getTopicId(), memberCpf,
+        VoteStatusEnum.VALID))
         .thenReturn(true);
-    assertThrows(BusinessException.class, () -> voteService.vote(voteRequest));
+    assertThrows(BusinessException.class, () -> voteService.vote(vote));
   }
 
   @Test
   public void throwErrorIfVoteIsInvalid() {
     voteRequest.setVote("naoo");
 
-    assertThrows(BusinessException.class, () -> voteService.vote(voteRequest));
+    assertThrows(BusinessException.class, () -> voteService.vote(vote));
   }
 
 }

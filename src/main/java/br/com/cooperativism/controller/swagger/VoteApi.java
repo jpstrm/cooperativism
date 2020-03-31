@@ -29,6 +29,15 @@ public interface VoteApi {
           response = Void.class)})
   ResponseEntity<Void> vote(@ApiParam(name = "Request", required = true) VoteRequest voteRequest);
 
+  @ApiOperation(value = "Encontrar um voto por Id",
+      notes = "Operação para encontrar uma voto pelo Id.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
+          response = VoteResponse.class)})
+  ResponseEntity<VoteResponse> findById(
+      @ApiParam(name = "Id do Voto", example = "1", required = true) Long voteId);
+
   @ApiOperation(value = "Encontrar um voto por CPF",
       notes = "Operação para encontrar uma voto pelo CPF do Associado.",
       consumes = "application/json", produces = "application/json")

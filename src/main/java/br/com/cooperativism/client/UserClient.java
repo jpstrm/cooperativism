@@ -37,7 +37,7 @@ public class UserClient {
         })
         .onErrorResume(err -> {
           logger.error("Erro ao verificar CPF do Associado");
-          return Mono.just(true);
+          return Mono.just(false);
         });
   }
 

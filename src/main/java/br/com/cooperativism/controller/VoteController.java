@@ -2,6 +2,7 @@ package br.com.cooperativism.controller;
 
 import br.com.cooperativism.controller.swagger.VoteApi;
 import br.com.cooperativism.converter.VoteConverter;
+import br.com.cooperativism.dto.VoteDto;
 import br.com.cooperativism.request.VoteRequest;
 import br.com.cooperativism.response.vote.VoteListResponse;
 import br.com.cooperativism.response.vote.VoteResponse;
@@ -46,18 +47,29 @@ public class VoteController implements VoteApi {
   @PostMapping
   public ResponseEntity<Void> vote(@Valid @RequestBody VoteRequest voteRequest) {
     logger.info("Request POST /votos");
-    voteService.vote(voteRequest);
-    logger.info("Response POST /votos - msg: sucesso");
+    voteService.sendVote(voteRequest);
+    logger.info("Response POST /votos - enviado para fila");
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @Override
-  @GetMapping("/{memberCpf}")
+  @GetMapping("/{voteId}")
+  public ResponseEntity<VoteResponse> findById(@PathVariable final Long voteId) {
+    logger.info("Request GET /votos/{}", voteId);
+    final VoteDto voteDto = voteService.findById(voteId);
+    final VoteResponse voteResponse = voteConverter.toResponse(voteDto);
+    logger.info("Response POST /votos/{} - sucesso.", voteId);
+
+    return ResponseEntity.status(HttpStatus.OK).body(voteResponse);
+  }
+
+  @Override
+  @GetMapping("/associados/cpf/{memberCpf}")
   public ResponseEntity<VoteResponse> findByMemberCpf(@PathVariable String memberCpf) {
-    logger.info("Request POST /votos/{}", memberCpf);
+    logger.info("Request GET /votos/{}", memberCpf);
     final VoteResponse response = voteConverter.toResponse(voteService.findByMemberCpfToDto(memberCpf));
-    logger.info("Response POST /votos/{} - {}", memberCpf, response);
+    logger.info("Response GET /votos/{} - {}", memberCpf, response);
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
@@ -65,9 +77,9 @@ public class VoteController implements VoteApi {
   @Override
   @GetMapping("/sessoes/{sessionId}")
   public ResponseEntity<VoteListResponse> findBySessionId(@PathVariable final Long sessionId) {
-    logger.info("Request POST /votos/sessoes/{}", sessionId);
+    logger.info("Request GET /votos/sessoes/{}", sessionId);
     final VoteListResponse response = voteConverter.toListResponse(voteService.findBySessionId(sessionId));
-    logger.info("Response POST /votos/sessoes/{} - {}", sessionId, response);
+    logger.info("Response GET /votos/sessoes/{} - {}", sessionId, response);
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }

@@ -2,12 +2,10 @@ package br.com.cooperativism.service;
 
 import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
-import br.com.cooperativism.enums.VoteEnum;
+import br.com.cooperativism.dto.VoteResult;
 import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.model.Topic;
-import br.com.cooperativism.model.Vote;
 import br.com.cooperativism.repository.TopicRepository;
-import br.com.cooperativism.repository.VoteRepository;
 import br.com.cooperativism.request.TopicRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class TopicService {
   private TopicConverter topicConverter;
 
   @Autowired
-  private VoteRepository voteRepository;
+  private VoteService voteService;
 
   public List<TopicDto> findAllToDto() {
     return topicRepository.findAll().stream()
@@ -64,15 +62,9 @@ public class TopicService {
   }
 
   private TopicDto fillVotesToDto(final TopicDto topicDto) {
-    final List<Vote> votes = voteRepository.findBySessionTopicId(topicDto.getId());
-    final Integer votesNo = Math.toIntExact(votes.stream()
-        .filter(v -> v.getVote().equals(VoteEnum.NO))
-        .count());
-    final Integer votesYes = Math.toIntExact(votes.stream()
-        .filter(v -> v.getVote().equals(VoteEnum.YES))
-        .count());
-    topicDto.setVotesNo(votesNo);
-    topicDto.setVotesYes(votesYes);
+    final VoteResult voteResult = voteService.sumVotesByTopicId(topicDto.getId());
+    topicDto.setVotesYes(voteResult.getVotesYes());
+    topicDto.setVotesNo(voteResult.getVotesNo());
 
     return topicDto;
   }

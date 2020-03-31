@@ -1,5 +1,6 @@
 package br.com.cooperativism.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,13 +27,28 @@ public class VoteDto implements Serializable {
   @JsonProperty("voto")
   protected String vote;
 
+  @ApiModelProperty(value = "Status do voto", example = "VALIDO")
+  private String status;
+
+  @ApiModelProperty("Mensagem de erro")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  @JsonProperty("mensagemErro")
+  private String errorMsg;
+
   public VoteDto() {
   }
 
-  public VoteDto(MemberDto member, SessionDto session, String vote) {
+  public VoteDto(final MemberDto member, final SessionDto session, final String vote) {
     this.member = member;
     this.session = session;
     this.vote = vote;
+  }
+
+  public VoteDto(final MemberDto member, final SessionDto session, final String vote, final String status) {
+    this.member = member;
+    this.session = session;
+    this.vote = vote;
+    this.status = status;
   }
 
   public Long getId() {
@@ -65,6 +81,22 @@ public class VoteDto implements Serializable {
 
   public void setVote(String vote) {
     this.vote = vote;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getErrorMsg() {
+    return errorMsg;
+  }
+
+  public void setErrorMsg(String errorMsg) {
+    this.errorMsg = errorMsg;
   }
 
 }

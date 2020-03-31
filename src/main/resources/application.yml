@@ -36,7 +36,20 @@ spring:
       init-s-q-l: SELECT 1 FROM DUAL
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: 'create-drop'
+  rabbitmq:
+    host: ${MQ_HOST:localhost}
+    port: ${MQ_PORT:5672}
+    username: ${MQ_USER:mquser}
+    password: ${MQ_PASSWORD:mq1234567}
+    virtual-host: cooperativism
+    queue: vote-queue
+    exchange: cooperativism-exchange
+    deadQueue: vote-dead-queue
+    connection-timeout: 15000
+    listener:
+      simple:
+        default-requeue-rejected: false
 
 api:
   user: https://user-info.herokuapp.com/users
