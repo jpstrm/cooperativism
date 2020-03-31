@@ -1,6 +1,6 @@
 logging:
   level:
-    br.com.cooperativism: DEBUG
+    br.com.cooperativism: ${API_LOG_LEVEL:DEBUG}
     org.springframework:
       boot.context: INFO
 
@@ -31,7 +31,7 @@ spring:
       test-on-connect: true
       validation-query: SELECT 1 FROM DUAL
       init-s-q-l: SELECT 1 FROM DUAL
-    url: jdbc:mysql://${DB_URL:localhost}:${DB_PORT:3306}/cooperativism?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:cooperativism}?reconnect=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   jpa:
