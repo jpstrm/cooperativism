@@ -2,15 +2,12 @@ package br.com.cooperativism.service;
 
 import br.com.cooperativism.converter.TopicConverter;
 import br.com.cooperativism.dto.TopicDto;
-import br.com.cooperativism.enums.VoteEnum;
+import br.com.cooperativism.dto.VoteResult;
 import br.com.cooperativism.exception.NotFoundException;
 import br.com.cooperativism.mock.topic.TopicDtoMock;
 import br.com.cooperativism.mock.topic.TopicMock;
-import br.com.cooperativism.mock.vote.VoteMock;
 import br.com.cooperativism.model.Topic;
-import br.com.cooperativism.model.Vote;
 import br.com.cooperativism.repository.TopicRepository;
-import br.com.cooperativism.repository.VoteRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,31 +40,31 @@ class TopicServiceTest {
   private TopicConverter topicConverter;
 
   @Mock
-  private VoteRepository voteRepository;
+  private VoteService voteService;
 
   private String topicName = "Test";
 
   @Test
   public void shouldComputeVotesInFindAllToDto() {
-    TopicDto topicDto = TopicDtoMock.getRandom(topicName, 2, 1);
+    TopicDto topicDto = TopicDtoMock.getRandom(topicName);
     ReflectionTestUtils.setField(topicDto, "id", 1L);
     List<Topic> topics = TopicMock.getListRandom(topicName);
-    List<Vote> votes = VoteMock.getListRandom("Test", VoteEnum.YES);
+    Integer votesYes = 2;
+    Integer votesNo = 0;
+    VoteResult voteResult = new VoteResult(votesYes, votesNo);
 
     when(topicRepository.findAll())
         .thenReturn(topics);
     when(topicConverter.toDto(isA(Topic.class)))
         .thenReturn(topicDto);
-    when(voteRepository.findBySessionTopicId(anyLong()))
-        .thenReturn(votes);
+    when(voteService.sumVotesByTopicId(anyLong()))
+        .thenReturn(voteResult);
 
     List<TopicDto> result = topicService.findAllToDto();
 
     assertNotNull(result);
     assertFalse(result.isEmpty());
-    Integer votesYes = 1;
     assertEquals(votesYes, result.get(0).getVotesYes());
-    Integer votesNo = 0;
     assertEquals(votesNo, result.get(0).getVotesNo());
   }
 

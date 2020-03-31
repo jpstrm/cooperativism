@@ -41,6 +41,9 @@ class VoteServiceTest {
   @Mock
   private VoteConverter voteConverter;
 
+  @Mock
+  private MemberService memberService;
+
   private VoteRequest voteRequest;
   private Vote vote;
   private String memberCpf = "12345678912";
@@ -53,13 +56,8 @@ class VoteServiceTest {
 
   @Test
   public void shouldVote() {
-    VoteRequest voteRequest = VoteRequestMock.getRandom("SIM");
-
-    when(voteConverter.fromRequest(isA(VoteRequest.class)))
-        .thenReturn(vote);
-    when(voteRepository.existsBySessionTopicIdAndMemberCpfAndStatus(voteRequest.getTopicId(), anyString(),
-        isA(VoteStatusEnum.class)))
-        .thenReturn(false);
+    when(memberService.isCpfValid(anyString()))
+        .thenReturn(true);
 
     voteService.vote(vote);
 
@@ -85,17 +83,21 @@ class VoteServiceTest {
 
   @Test
   public void throwErrorIfMemberAlreadyVoted() {
+    when(voteConverter.fromRequest(isA(VoteRequest.class)))
+        .thenReturn(vote);
     when(voteRepository.existsBySessionTopicIdAndMemberCpfAndStatus(voteRequest.getTopicId(), memberCpf,
         VoteStatusEnum.VALID))
         .thenReturn(true);
-    assertThrows(BusinessException.class, () -> voteService.vote(vote));
+    assertThrows(BusinessException.class, () -> voteService.sendVote(voteRequest));
   }
 
   @Test
   public void throwErrorIfVoteIsInvalid() {
+    when(voteConverter.fromRequest(isA(VoteRequest.class)))
+        .thenReturn(vote);
     voteRequest.setVote("naoo");
 
-    assertThrows(BusinessException.class, () -> voteService.vote(vote));
+    assertThrows(BusinessException.class, () -> voteService.sendVote(voteRequest));
   }
 
 }

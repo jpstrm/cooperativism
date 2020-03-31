@@ -40,8 +40,8 @@ spring:
   rabbitmq:
     host: ${MQ_HOST:localhost}
     port: ${MQ_PORT:5672}
-    username: ${MQ_USER:mquser}
-    password: ${MQ_PASSWORD:mq1234567}
+    username: ${MQ_USER}
+    password: ${MQ_PASSWORD}
     virtual-host: cooperativism
     queue: vote-queue
     exchange: cooperativism-exchange

@@ -117,6 +117,13 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- RabbitMq test -->
+    <dependency>
+      <groupId>org.springframework.amqp</groupId>
+      <artifactId>spring-rabbit-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
