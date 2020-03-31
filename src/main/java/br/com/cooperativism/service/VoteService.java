@@ -56,6 +56,7 @@ public class VoteService {
       final String msg = "CPF inválido para Votar- ".concat(vote.getMember().getCpf());
       logger.error(msg);
       vote.setErrorMsg(msg);
+      vote.setStatus(VoteStatusEnum.INVALID);
     }
     voteRepository.save(vote);
   }

@@ -26,7 +26,7 @@ public class VoteListener {
     logger.info("Computando voto: " + voteIn.toString());
     final Vote vote = voteConverter.fromMessage(voteIn);
     voteService.vote(vote);
-    logger.info("Voto computado com sucesso - {}", vote);
+    logger.info("Voto salvo com sucesso - {}", vote);
   }
 
 }
