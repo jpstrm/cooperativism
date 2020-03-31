@@ -42,7 +42,7 @@ spring:
     port: ${MQ_PORT:5672}
     username: ${MQ_USER}
     password: ${MQ_PASSWORD}
-    virtual-host: cooperativism
+    virtual-host: ${MQ_VHOST:hvhwvzne}
     queue: vote-queue
     exchange: cooperativism-exchange
     deadQueue: vote-dead-queue
