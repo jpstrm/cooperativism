@@ -11,7 +11,8 @@ Gerencimaneto de sessões de votações em Assembleias
 # Requisitos
 
 - Certifique-se de primeiro ter instalado e configurado as tecnologias:
-    Java, Maven, Maven-Wrapper.
+    - JDK 11
+    - Maven
 
 # Execução
 
@@ -31,4 +32,6 @@ mvn clean package
 
 # Documentação
 
-- Swagger: `http://localhost:8000/swagger-ui.html/` 
+- Swagger
+    - local: `http://localhost:8000/swagger-ui.html/`
+    - heroku: `https://cooperativism.herokuapp.com/swagger-ui.html/`

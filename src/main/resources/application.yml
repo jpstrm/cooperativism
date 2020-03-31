@@ -36,7 +36,7 @@ spring:
       init-s-q-l: SELECT 1 FROM DUAL
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
 api:
   user: https://user-info.herokuapp.com/users
