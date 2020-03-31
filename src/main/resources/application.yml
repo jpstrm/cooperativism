@@ -31,9 +31,9 @@ spring:
       test-on-connect: true
       validation-query: SELECT 1 FROM DUAL
       init-s-q-l: SELECT 1 FROM DUAL
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MY_SQL_PORT:3306}/cooperativism?createDatabaseIfNotExist=true
-    username: root
-    password: db1234567
+    url: jdbc:mysql://${DB_URL:localhost}:${DB_PORT:3306}/cooperativism?createDatabaseIfNotExist=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: none
