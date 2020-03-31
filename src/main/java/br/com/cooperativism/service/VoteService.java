@@ -44,16 +44,21 @@ public class VoteService {
     validateVote(voteRequest);
     Vote vote = voteConverter.fromRequest(voteRequest);
     vote = findByTopicIdAndMemberCpf(vote);
-    voteRunner.sendVote(vote);
     voteRepository.save(vote);
+    if (vote.isInvalid()) {
+      throw new BusinessException("Voto inválido: " + vote.getErrorMsg());
+    }
+    voteRunner.sendVote(vote);
   }
 
   public void vote(Vote vote) {
+    vote.setMember(memberService.findByCpf(vote.getMember().getCpf())
+        .orElse(vote.getMember()));
     vote = findByTopicIdAndMemberCpf(vote);
     if (memberService.isCpfValid(vote.getMember().getCpf())) {
       vote.setStatus(VoteStatusEnum.VALID);
     } else {
-      final String msg = "CPF inválido para Votar- ".concat(vote.getMember().getCpf());
+      final String msg = "CPF inválido para Votar - ".concat(vote.getMember().getCpf());
       logger.error(msg);
       vote.setErrorMsg(msg);
       vote.setStatus(VoteStatusEnum.INVALID);

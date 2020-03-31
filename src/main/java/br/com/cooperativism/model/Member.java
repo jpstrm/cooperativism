@@ -11,7 +11,7 @@ public class Member extends AbstractModel implements Serializable {
 
   private String name;
 
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false)
   private String cpf;
 
   public Member() {

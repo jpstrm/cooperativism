@@ -14,7 +14,7 @@ import java.util.Date;
 public abstract class AbstractModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Temporal(TemporalType.TIMESTAMP)

@@ -30,6 +30,7 @@ public class UserClient {
         .retrieve()
         .bodyToMono(UserInfoDto.class)
         .map(u -> {
+          logger.info("Cpf verificado com sucesso - {} - status: {}", cpf, u.getStatus());
           if (UserStatusEnum.ABLE_TO_VOTE.equals(u.getStatus())) {
             return true;
           }

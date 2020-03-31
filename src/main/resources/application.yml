@@ -36,7 +36,7 @@ spring:
       init-s-q-l: SELECT 1 FROM DUAL
   jpa:
     hibernate:
-      ddl-auto: 'create-drop'
+      ddl-auto: update
   rabbitmq:
     host: ${MQ_HOST:localhost}
     port: ${MQ_PORT:5672}

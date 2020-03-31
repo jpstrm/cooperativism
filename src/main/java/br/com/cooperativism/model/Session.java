@@ -14,15 +14,15 @@ public class Session extends AbstractModel implements Serializable {
 
   private static final long serialVersionUID = 7211846874754010863L;
 
+  @OneToOne(optional = false)
+  @JoinColumn(name = "topic_id", referencedColumnName = "id", nullable = false)
+  private Topic topic;
+
   @Column(name = "voting_start", nullable = false)
   private LocalDateTime votingStart = ApiHelper.getNow();
 
   @Column(name = "voting_end", nullable = false)
   private LocalDateTime votingEnd;
-
-  @OneToOne(optional = false)
-  @JoinColumn(name = "topic_id", referencedColumnName = "id", nullable = false)
-  private Topic topic;
 
   public Session() {}
 

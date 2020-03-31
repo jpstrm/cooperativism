@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -83,8 +82,6 @@ class VoteServiceTest {
 
   @Test
   public void throwErrorIfMemberAlreadyVoted() {
-    when(voteConverter.fromRequest(isA(VoteRequest.class)))
-        .thenReturn(vote);
     when(voteRepository.existsBySessionTopicIdAndMemberCpfAndStatus(voteRequest.getTopicId(), memberCpf,
         VoteStatusEnum.VALID))
         .thenReturn(true);
@@ -93,8 +90,6 @@ class VoteServiceTest {
 
   @Test
   public void throwErrorIfVoteIsInvalid() {
-    when(voteConverter.fromRequest(isA(VoteRequest.class)))
-        .thenReturn(vote);
     voteRequest.setVote("naoo");
 
     assertThrows(BusinessException.class, () -> voteService.sendVote(voteRequest));

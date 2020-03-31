@@ -11,7 +11,7 @@ public class Vote extends AbstractModel implements Serializable {
 
   private static final long serialVersionUID = -5141408527987836636L;
 
-  @OneToOne(optional = false, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+  @ManyToOne(optional = false, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
   @JoinColumn(name = "member_id", referencedColumnName = "id", nullable = false)
   private Member member;
 
@@ -75,6 +75,10 @@ public class Vote extends AbstractModel implements Serializable {
 
   public void setErrorMsg(String errorMsg) {
     this.errorMsg = errorMsg;
+  }
+
+  public boolean isInvalid() {
+    return VoteStatusEnum.INVALID.equals(status);
   }
 
 }

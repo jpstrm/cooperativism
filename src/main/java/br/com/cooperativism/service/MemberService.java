@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -40,6 +41,11 @@ public class MemberService {
   public Boolean isCpfValid(String cpf) {
 
     return userClient.isCpfValid(cpf).block();
+  }
+
+  public Optional<Member> findByCpf(final String cpf) {
+
+    return memberRepository.findFirstByCpf(cpf);
   }
 
 }
