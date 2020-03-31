@@ -42,4 +42,12 @@ public class TopicListResponse {
     this.topicDtos = topicDtos;
   }
 
+  @Override
+  public String toString() {
+    return "{\"TopicListResponse\":{"
+        + "\"total\":\"" + total + "\""
+        + ", \"topicDtos\":" + topicDtos
+        + "}}";
+  }
+
 }

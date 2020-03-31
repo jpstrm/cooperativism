@@ -22,4 +22,12 @@ public class SessionResponse extends SessionDto {
     this.status = status;
   }
 
+  @Override
+  public String toString() {
+    return "{\"SessionResponse\":"
+        + super.toString()
+        + ", \"status\":\"" + status + "\""
+        + "}";
+  }
+
 }

@@ -28,4 +28,11 @@ public class TopicRequest implements Serializable {
     this.name = name;
   }
 
+  @Override
+  public String toString() {
+    return "{\"TopicRequest\":{"
+        + "\"name\":\"" + name + "\""
+        + "}}";
+  }
+
 }

@@ -68,4 +68,13 @@ public class VoteRequest implements Serializable {
     return VoteEnum.find(this.vote).get();
   }
 
+  @Override
+  public String toString() {
+    return "{\"VoteRequest\":{"
+        + "\"topicId\":\"" + topicId + "\""
+        + ", \"memberCpf\":\"" + memberCpf + "\""
+        + ", \"vote\":\"" + vote + "\""
+        + "}}";
+  }
+
 }

@@ -16,4 +16,13 @@ public class VoteResponse extends VoteDto implements Serializable {
         .map(VoteEnum::getValue)
         .orElse(vote);
   }
+
+  @Override
+  public String toString() {
+    return "{\"VoteResponse\":"
+        + super.toString()
+        + ", \"vote\":\"" + vote + "\""
+        + "}";
+  }
+
 }

@@ -44,4 +44,12 @@ public class SessionRequest {
     this.topicId = topicId;
   }
 
+  @Override
+  public String toString() {
+    return "{\"SessionRequest\":{"
+        + "\"duration\":\"" + duration + "\""
+        + ", \"topicId\":\"" + topicId + "\""
+        + "}}";
+  }
+
 }

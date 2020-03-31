@@ -40,4 +40,12 @@ public class SessionListResponse {
     this.sessions = sessions;
   }
 
+  @Override
+  public String toString() {
+    return "{\"SessionListResponse\":{"
+        + "\"total\":\"" + total + "\""
+        + ", \"sessions\":" + sessions
+        + "}}";
+  }
+
 }

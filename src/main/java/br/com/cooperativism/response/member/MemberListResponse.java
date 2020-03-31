@@ -44,4 +44,12 @@ public class MemberListResponse {
     this.memberDtos = memberDtos;
   }
 
+  @Override
+  public String toString() {
+    return "{\"MemberListResponse\":{"
+        + "\"total\":\"" + total + "\""
+        + ", \"memberDtos\":" + memberDtos
+        + "}}";
+  }
+
 }

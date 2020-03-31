@@ -44,4 +44,12 @@ public class VoteListResponse implements Serializable {
     this.votes = votes;
   }
 
+  @Override
+  public String toString() {
+    return "{\"VoteListResponse\":{"
+        + "\"total\":\"" + total + "\""
+        + ", \"votes\":" + votes
+        + "}}";
+  }
+
 }
