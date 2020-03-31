@@ -16,6 +16,10 @@ Gerencimaneto de sessões de votações em Assembleias
 
 # Execução
 
+## Pré-requisitos
+- Trocar as variáveis do ambiente em src/main/resources/application.yml por configurações válidas
+ou exportar as variáveis de ambiente para a máquina local
+
 ### Maven
 
 - Executando no ambiente local 
