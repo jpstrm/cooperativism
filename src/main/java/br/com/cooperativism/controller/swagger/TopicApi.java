@@ -29,6 +29,15 @@ public interface TopicApi {
           response = Void.class)})
   ResponseEntity<Void> create(@ApiParam(name = "Request", required = true) TopicRequest topicRequest);
 
+  @ApiOperation(value = "Encontrar uma Paula por id",
+      notes = "Operação para encontrar uma pauta pelo id.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requisição realizada com sucesso.",
+          response = TopicDto.class)})
+  ResponseEntity<TopicDto> findById(@ApiParam(name = "Id da Pauta", example = "1", required = true) Long topicId);
+
+
   @ApiOperation(value = "Encontrar uma Paula",
       notes = "Operação para encontrar uma pauta pelo nome.",
       consumes = "application/json", produces = "application/json")

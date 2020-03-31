@@ -52,8 +52,15 @@ public class TopicService {
   }
 
   public Topic findById(final Long topicId) {
+
     return topicRepository.findById(topicId)
         .orElseThrow(this::throwNotFound);
+  }
+
+  public TopicDto findByIdToDto(final Long topicId) {
+    final TopicDto topicDto = topicConverter.toDto(findById(topicId));
+
+    return fillVotesToDto(topicDto);
   }
 
   private TopicDto fillVotesToDto(final TopicDto topicDto) {
@@ -66,6 +73,7 @@ public class TopicService {
         .count());
     topicDto.setVotesNo(votesNo);
     topicDto.setVotesYes(votesYes);
+
     return topicDto;
   }
 

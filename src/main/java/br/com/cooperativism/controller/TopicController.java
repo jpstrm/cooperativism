@@ -53,11 +53,21 @@ public class TopicController implements TopicApi {
   }
 
   @Override
-  @GetMapping("/{topicName}")
+  @GetMapping("/{topicId}")
+  public ResponseEntity<TopicDto> findById(@PathVariable final Long topicId) {
+    logger.info("Request GET /pautas/{}", topicId);
+    final TopicDto response = topicService.findByIdToDto(topicId);
+    logger.info("Response GET /pautas/{} - {}", topicId, response);
+
+    return ResponseEntity.status(HttpStatus.OK).body(response);
+  }
+
+  @Override
+  @GetMapping("/nome/{topicName}")
   public ResponseEntity<TopicDto> findByName(@PathVariable final String topicName) {
-    logger.info("Request POST /pautas/{}", topicName);
+    logger.info("Request GET /pautas/{}", topicName);
     final TopicDto response = topicService.findByNameToDto(topicName);
-    logger.info("Response POST /pautas/{} - {}", topicName, response);
+    logger.info("Response GET /pautas/{} - {}", topicName, response);
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
