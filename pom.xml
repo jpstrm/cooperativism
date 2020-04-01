@@ -11,7 +11,7 @@
   <artifactId>cooperativismo</artifactId>
   <version>1.0.0</version>
   <name>Cooperativismo</name>
-  <description>Gerenciamento de Assembleias - controle de votação</description>
+  <description>Gerenciamento de Assembleias - controle de votação. Autor: João Paulo Santarém</description>
 
   <properties>
     <resource.delimiter>~</resource.delimiter>

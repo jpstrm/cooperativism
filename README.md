@@ -1,6 +1,14 @@
+# Autor
+
+- João Paulo Santarém
+- Email: jpstrm@gmail.com
+
 # Cooperativismo
 
 Gerencimaneto de sessões de votações em Assembleias
+
+
+
         
 # Tecnologias usadas
 
